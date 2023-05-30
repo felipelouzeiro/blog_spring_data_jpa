@@ -47,7 +47,7 @@ public class BlogController {
     @RequestMapping(value = "/new-post",method = RequestMethod.POST)
     public String savePost(@Valid Post post, BindingResult result, RedirectAttributes attributes){
         if(result.hasErrors()){
-            System.out.println("ERRORSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+            attributes.addFlashAttribute("message","Para publicar, é necessário preencher os campos obrigatórios.");
             return "redirect:/new-post";
         }
 
