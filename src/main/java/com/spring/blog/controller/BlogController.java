@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -41,6 +42,17 @@ public class BlogController {
     @RequestMapping(value = "/new-post",method = RequestMethod.GET)
     public String getPostForm(){
         return "postForm";
+    }
+
+    @RequestMapping(value = "/new-post",method = RequestMethod.POST)
+    public String savePost(@Valid Post post, BindingResult result, RedirectAttributes attributes){
+        if(result.hasErrors()){
+            return "redirect:/new-post";
+        }
+
+        post.setDate(LocalDate.now());
+        blogService.save(post);
+        return "redirect:/posts";
     }
 
 }
