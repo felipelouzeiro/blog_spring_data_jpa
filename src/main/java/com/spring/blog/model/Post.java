@@ -2,8 +2,9 @@ package com.spring.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
@@ -15,12 +16,15 @@ public class Post {
      private Long id;
 
     @NotBlank
+    @NotEmpty
      private String title;
 
     @NotBlank
+    @NotEmpty
     private String author;
 
     @NotBlank
+    @NotEmpty
     @Lob
     private  String content;
 
