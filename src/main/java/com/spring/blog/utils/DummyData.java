@@ -3,6 +3,7 @@ package com.spring.blog.utils;
 import com.spring.blog.model.Post;
 import com.spring.blog.repository.BlogRepository;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,13 @@ public class DummyData {
     @Autowired
     BlogRepository blogRepository;
 
-    //@PostConstruct
+    @Transactional
+    @PostConstruct
+    public void truncateTable(){
+        blogRepository.deleteAll();
+    }
+
+    @PostConstruct
     public void savePosts(){
 
         List<Post> postList = new ArrayList<>();
